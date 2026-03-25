@@ -1,0 +1,30 @@
+CREATE TABLE IF NOT EXISTS universities (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  slug TEXT UNIQUE NOT NULL,
+  lat DOUBLE PRECISION NOT NULL,
+  lng DOUBLE PRECISION NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS buildings (
+  id SERIAL PRIMARY KEY,
+  university_id INT NOT NULL REFERENCES universities(id) ON DELETE CASCADE,
+  name TEXT NOT NULL,
+  lat DOUBLE PRECISION NOT NULL,
+  lng DOUBLE PRECISION NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS events (
+  id SERIAL PRIMARY KEY,
+  university_id INT NOT NULL REFERENCES universities(id) ON DELETE CASCADE,
+  building_id INT REFERENCES buildings(id) ON DELETE SET NULL,
+  title TEXT NOT NULL,
+  description TEXT,
+  food_tags TEXT[] DEFAULT '{}',
+  source TEXT NOT NULL,
+  source_url TEXT,
+  image_url TEXT,
+  event_time TIMESTAMPTZ,
+  posted_at TIMESTAMPTZ DEFAULT NOW(),
+  is_active BOOLEAN DEFAULT TRUE
+);
