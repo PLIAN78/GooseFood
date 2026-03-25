@@ -56,7 +56,7 @@ async function seed() {
         ($2, $8, 'Hart House BBQ', 'Free burgers and dogs on the front lawn.', ARRAY['bbq','burgers'], 'discord', NOW() + interval '6 hours', true)
     `, [waterloo.id, uoft.id, slc.id, dc.id, mc.id, bahen.id, sidney.id, hart.id]);
 
-    console.log('✅ Seed complete!');
+    console.log('Seed complete!');
     console.log('   - 2 universities');
     console.log('   - 6 buildings');
     console.log('   - 7 events');
