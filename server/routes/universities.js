@@ -1,11 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../config/db');
+const supabase = require('../config/db');
 
 router.get('/', async (req, res) => {
   try {
-    const result = await db.query('SELECT * FROM universities ORDER BY name');
-    res.json(result.rows);
+    const { data, error } = await supabase
+      .from('universities')
+      .select('*')
+      .order('name');
+
+    if (error) throw error;
+    res.json(data);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to fetch universities' });
