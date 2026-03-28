@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const universitiesRouter = require('./routes/universities');
 const eventsRouter = require('./routes/events');
+const { startDiscordBot } = require('./scrapers/discordScraper');
 
 const app = express();
 
@@ -24,6 +25,19 @@ app.use((err, req, res, _next) => {
 });
 
 const PORT = process.env.PORT || 4000;
+
 app.listen(PORT, () => {
   console.log(`✅ Server running on http://localhost:${PORT}`);
 });
+
+// Start Discord bot
+startDiscordBot();
+
+// Instagram scraper disabled for now
+// const { runInstagramScraper } = require('./scrapers/instagramScraper');
+// const cron = require('node-cron');
+// runInstagramScraper();
+// cron.schedule('0 */2 * * *', () => {
+//   console.log('⏰ Running scheduled Instagram scrape...');
+//   runInstagramScraper();
+// });
