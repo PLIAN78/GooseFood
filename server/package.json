@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@supabase/supabase-js": "^2.100.1",
+    "apify-client": "^2.22.3",
     "cors": "^2.8.6",
     "discord.js": "^14.25.1",
     "dotenv": "^17.3.1",
